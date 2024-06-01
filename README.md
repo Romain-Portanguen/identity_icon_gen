@@ -23,7 +23,7 @@ Lightweight application for generating random identity icons
  
 <h2 id="started">🚀 Getting started</h2>
 
-Run the application locally. The first time the component is rendered, an identity icon is randomly generated! If you're happy with it, you can download it in the format of your choice (`.png` || `.jpg`). The second option is to click on the 'Generate Avatar' button; when you click, a new generation takes place, click as many times as necessary until you find the îcon you like best! Enjoy!
+Run the application locally. The first time the component is rendered, an identity icon is randomly generated! If you're happy with it, you can download it in the format of your choice (`.png` || `.jpg`). The second option is to click on the 'Generate Avatar' button; when you click, a new generation takes place, click as many times as necessary until you find the icon you like best! Enjoy!
  
 <h3>Prerequisites</h3>
 
