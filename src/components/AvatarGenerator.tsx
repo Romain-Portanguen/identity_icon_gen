@@ -11,8 +11,16 @@ const Container = styled.div`
   border-radius: 4px;
   border: 1px solid #009bff;
   box-shadow: 0 0 10px #007bff;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  max-width: 400px;
+  padding: 20px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const CanvasContainer = styled.div`
@@ -21,16 +29,23 @@ const CanvasContainer = styled.div`
   border: 1px solid #009bff;
   box-shadow: 0 0 10px #007bff;
   display: flex;
-  height: 256px;
+  height: auto;
   justify-content: center;
   margin: 20px;
-  width: 256px;
+  max-width: 256px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    height: 256px;
+  }
 `;
 
 const Canvas = styled.canvas`
   border-radius: 4px;
-  height: 256px;
-  width: 256px;
+  height: 100%;
+  max-height: 256px;
+  max-width: 256px;
+  width: 100%;
 `;
 
 const DownloadButtonWrapper = styled.div`
@@ -76,7 +91,7 @@ export const AvatarGenerator: React.FC<AvatarGeneratorProps> = ({ setSvgCode }) 
         const encodedSvgCode = btoa(svgCode);
         const decodedSvgCode = atob(encodedSvgCode);
 
-        setSvgCode(decodedSvgCode);
+        setSvgCode(decodedSvgCode.trim());
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

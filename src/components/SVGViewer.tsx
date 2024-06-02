@@ -8,11 +8,17 @@ const SvgCodeContainer = styled.div`
   border-radius: 4px;
   border: 1px solid #009bff;
   box-shadow: 0 0 10px #007bff;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 100%;
-  justify-content: space-between;
+  max-width: 400px;
+  padding: 20px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const Title = styled.h2`
@@ -20,24 +26,27 @@ const Title = styled.h2`
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  width: 100%;
 `;
 
 const CodeBlock = styled.code`
-background-color: #000;
-border-radius: 4px;
-box-sizing: border-box;
-color: #fff;
-font-family: 'Menlo', monospace;
-font-size: 14px;
-max-height: 234px;
-overflow-x: hidden;
-overflow-y: auto;
-padding: 10px;
-text-align: left;
-white-space: pre-wrap;
-width: 95%;
-word-wrap: break-word;
+  background-color: #000;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: 'Menlo', monospace;
+  font-size: 14px;
+  max-height: 258px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 10px;
+  text-align: left;
+  white-space: pre-wrap;
+  width: 100%;
+  word-wrap: break-word;
+
+  @media (min-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const DownloadButtonWrapper = styled.div`
