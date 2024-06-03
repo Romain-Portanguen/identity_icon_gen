@@ -1,55 +1,58 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
+import { Tooltip } from '../styles/components/Tooltip';
+import { Button } from '../styles/components/ActionButton';
 
-import { Button } from '../styles/button';
+const TerminalContainer = styled.div`
+background-color: #2d2d2d;
+border-radius: 6px;
+box-shadow: 0 0 10px #007bff;
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+max-width: 400px;
+padding: 20px;
+width: 100%;
 
-const SvgCodeContainer = styled.div`
+@media (min-width: 768px) {
+  max-width: 100%;
+}
+`;
+
+const TerminalHeader = styled.div`
   align-items: center;
-  border-radius: 4px;
-  border: 1px solid #009bff;
-  box-shadow: 0 0 10px #007bff;
-  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  padding: 20px;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    max-width: 100%;
-  }
+  height: 20px;
+  justify-content: flex-start;
+  padding: 5px;
 `;
 
-const Title = styled.h2`
-  font-family: 'Roboto', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
+const TerminalButton = styled.div<{ color: string }>`
+  background-color: ${(props) => props.color};
+  border-radius: 50%;
+  height: 12px;
+  margin-right: 6px;
+  width: 12px;
 `;
 
-const CodeBlock = styled.code`
-  background-color: #000;
+const CodeBlock = styled.pre`
+  background-color: #2d2d2d;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #fff;
+  color: #f8f8f2;
   font-family: 'Menlo', monospace;
   font-size: 14px;
-  max-height: 258px;
-  overflow-x: hidden;
+  max-height: 272px;
+  overflow-x: auto;
   overflow-y: auto;
   padding: 10px;
   text-align: left;
   white-space: pre-wrap;
   width: 100%;
   word-wrap: break-word;
-
-  @media (min-width: 768px) {
-    width: 95%;
-  }
 `;
 
-const DownloadButtonWrapper = styled.div`
+const CopyButtonWrapper = styled.div`
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -61,21 +64,28 @@ interface SvgCodeViewerProps {
 }
 
 export const SvgCodeViewer: React.FC<SvgCodeViewerProps> = ({ svgCode }) => {
+
+  const TerminalButtons = useMemo(() => (
+    <TerminalHeader>
+      <TerminalButton color="#ff5f56" />
+      <TerminalButton color="#ffbd2e" />
+      <TerminalButton color="#27c93f" />
+    </TerminalHeader>
+  ), []);
+
   const copyToClipboard = useCallback(() => {
-    navigator.clipboard.writeText(svgCode)
+    navigator.clipboard.writeText(svgCode);
   }, [svgCode]);
 
   return (
-    <>
-      {svgCode ? (
-        <SvgCodeContainer>
-          <Title>Code svg generated</Title>
-          <CodeBlock>{svgCode}</CodeBlock>
-          <DownloadButtonWrapper>
-            <Button onClick={copyToClipboard}>Copy SVG Code</Button>
-          </DownloadButtonWrapper>
-        </SvgCodeContainer>
-      ) : null}
-    </>
+    <TerminalContainer>
+      {TerminalButtons}
+      <CodeBlock>{svgCode}</CodeBlock>
+      <CopyButtonWrapper>
+        <Tooltip message="Copied to clipboard!">
+          <Button onClick={copyToClipboard}>Copy SVG Code</Button>
+        </Tooltip>
+      </CopyButtonWrapper>
+    </TerminalContainer>
   );
 };

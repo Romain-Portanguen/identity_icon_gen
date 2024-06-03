@@ -5,37 +5,28 @@ import { SvgCodeViewer } from './components/SVGViewer';
 
 const AppContainer = styled.div`
   align-items: center;
+  background-color: #e8e8e8;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
   padding: 20px;
   width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   @media (min-height: 1024px) {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
     justify-content: space-between;
   }
   
   @media (min-height: 1180px) {
-    align-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
     justify-content: space-between;
   }
-  
 `;
 
 const AppTitle = styled.h1`
-  background-color: #007bff;
-  border-radius: 6px;
-  border: 1px solid #009bff;
-  box-shadow: 0 0 10px #007bff;
+  background: linear-gradient(to right, #007bff, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-family: 'Roboto', sans-serif;
   font-size: 24px;
   font-weight: 700;
@@ -82,6 +73,12 @@ const Column = styled.div`
 `;
 
 const Footer = styled.div`
+  background: linear-gradient(to left, #007bff, #00d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
   box-sizing: border-box;
   margin-top: 20px;
   max-width: 800px;

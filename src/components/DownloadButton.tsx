@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../styles/button';
+import { Button } from '../styles/components/ActionButton';
 
 interface DownloadButtonProps {
   canvasRef: React.RefObject<HTMLCanvasElement>;
