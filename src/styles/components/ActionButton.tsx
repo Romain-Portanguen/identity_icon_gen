@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  background: linear-gradient(to bottom, #007bff, #00d2ff);
+  background: linear-gradient(to top, #3399cc, #66ccff);
   border-radius: 4px;
   border: none;
   color: #fff;
