@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../styles/button';
+import { Button } from '../styles/components/ActionButton';
 import { buildOpts, renderIcon } from '../utils/iconUtils';
 import { IconOpts } from '../@types/types';
 import DownloadButton from './DownloadButton';
 
 const Container = styled.div`
   align-items: center;
-  border-radius: 4px;
-  border: 1px solid #009bff;
+  background-color: #2d2d2d;
+  border-radius: 6px;
   box-shadow: 0 0 10px #007bff;
   box-sizing: border-box;
   display: flex;
