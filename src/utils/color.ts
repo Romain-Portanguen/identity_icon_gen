@@ -1,6 +1,6 @@
-import XorshiftPRNG from './prng';
+import { XorshiftPRNG } from './xorshift/xorshift-prng';
 
-class ColorGenerator {
+export class ColorGenerator {
   private prng: XorshiftPRNG;
 
   constructor(seed: string) {
@@ -8,11 +8,9 @@ class ColorGenerator {
   }
 
   public createColor(): string {
-    const h = Math.floor(this.prng.rand() * 360);
-    const s = `${this.prng.rand() * 60 + 40}%`;
-    const l = `${(this.prng.rand() + this.prng.rand() + this.prng.rand() + this.prng.rand()) * 25}%`;
+    const h = Math.floor(this.prng.randomize() * 360);
+    const s = `${this.prng.randomize() * 60 + 40}%`;
+    const l = `${(this.prng.randomize() + this.prng.randomize() + this.prng.randomize() + this.prng.randomize()) * 25}%`;
     return `hsl(${h}, ${s}, ${l})`;
   }
 }
-
-export default ColorGenerator;
