@@ -1,5 +1,5 @@
 import { XorshiftPRNG } from './xorshift-prng';
-import { ColorGeneratorProps } from './color-generator.requirements';
+import { ColorGeneratorProps } from './@types/color-generator.requirements';
 
 const MAX_HUE = 360;
 const MIN_SATURATION = 40;

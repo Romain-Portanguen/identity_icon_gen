@@ -1,6 +1,6 @@
-import { ImageDataGenerator } from './image-data-generator';
+import { ImageDataGenerator } from '../image-data-generator';
 
-jest.mock('./xorshift-prng', () => {
+jest.mock('../xorshift-prng', () => {
   return {
     XorshiftPRNG: jest.fn().mockImplementation((seed: string) => {
       const seedValues: { [key: string]: number[] } = {
