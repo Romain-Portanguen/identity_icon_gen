@@ -1,4 +1,4 @@
-import { XorshiftPRNG } from './xorshift/xorshift-prng';
+import { XorshiftPRNG } from './xorshift-prng';
 
 export class ImageDataGenerator {
   private prng: XorshiftPRNG;
