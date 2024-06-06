@@ -1,4 +1,4 @@
-import { XorshiftPRNGProps } from './xorshift-prng.requirements';
+import { XorshiftPRNGProps } from './@types/xorshift-prng.requirements';
 
 export class XorshiftPRNG implements XorshiftPRNGProps {
   public seed: number[] = [0, 0, 0, 0];

@@ -1,5 +1,5 @@
 import { XorshiftPRNG } from './xorshift-prng';
-import { ImageDataGeneratorProps } from './image-data-generator.requirements';
+import { ImageDataGeneratorProps } from './@types/image-data-generator.requirements';
 
 export class ImageDataGenerator implements ImageDataGeneratorProps {
   private prng: XorshiftPRNG;
