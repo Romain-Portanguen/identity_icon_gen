@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '../styles/components/ActionButton';
-import { buildOpts, renderIcon } from '../utils/iconUtils';
-import { IconOpts } from '../@types/types';
+import { IconUtils } from '../utils/icon-utils';
+import { IconOptions, CanvasOptions } from '../utils/@types/icon-utils.requirements';
 import DownloadButton from './DownloadButton';
 
 const Container = styled.div`
@@ -67,11 +67,12 @@ export const AvatarGenerator: React.FC<AvatarGeneratorProps> = ({ setSvgCode }) 
     const canvas = canvasRef.current;
 
     if (canvas) {
-      const opts: IconOpts = {
+      const iconOptions: IconOptions = {
         size: 256,
         seed: Math.floor(Math.random() * Math.pow(10, 16)).toString(16),
       };
-      renderIcon(buildOpts(opts), canvas);
+      const builtOptions: CanvasOptions = IconUtils.buildOptions(iconOptions);
+      IconUtils.renderIcon(builtOptions, canvas);
       setCanvasUrl(canvas.toDataURL());
 
       const context = canvas.getContext('2d');
@@ -88,10 +89,7 @@ export const AvatarGenerator: React.FC<AvatarGeneratorProps> = ({ setSvgCode }) 
         </svg>
       `;
 
-        const encodedSvgCode = btoa(svgCode);
-        const decodedSvgCode = atob(encodedSvgCode);
-
-        setSvgCode(decodedSvgCode.trim());
+        setSvgCode(svgCode.trim());
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

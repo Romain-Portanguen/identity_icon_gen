@@ -1,6 +1,6 @@
-import { ColorGenerator } from './color-generator';
+import { ColorGenerator } from '../color-generator';
 
-jest.mock('./xorshift-prng', () => {
+jest.mock('../xorshift-prng', () => {
   return {
     XorshiftPRNG: jest.fn().mockImplementation((seed: string) => {
       const seedValues: { [key: string]: number[] } = {

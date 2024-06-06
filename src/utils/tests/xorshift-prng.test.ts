@@ -1,4 +1,4 @@
-import { XorshiftPRNG } from './xorshift-prng';
+import { XorshiftPRNG } from '../xorshift-prng';
 
 describe('The XorshiftPRNG class', () => {
   let prng: XorshiftPRNG;
