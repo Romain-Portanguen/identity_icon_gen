@@ -1,7 +1,7 @@
 import { CanvasOpts, IconOpts } from '../@types/types';
 import { RESOLUTION } from '../@types/constants';
 import { ColorGenerator } from './color-generator';
-import { ImageDataGenerator } from './imageData';
+import { ImageDataGenerator } from './image-data-generator';
 
 // Generate a random seed if not provided
 
