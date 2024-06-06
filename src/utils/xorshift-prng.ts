@@ -20,6 +20,7 @@ export class XorshiftPRNG implements XorshiftPRNGProps {
     this.seed[3] = this.updateFinalSeedValue(this.seed[3], t);
     return this.normalizeSeedValue(this.seed[3]);
   }
+  
   private updateSeedValue(currentValue: number, charCode: number): number {
     return (currentValue << 5) - currentValue + charCode;
   }
