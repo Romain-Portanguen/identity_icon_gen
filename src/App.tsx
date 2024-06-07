@@ -152,6 +152,8 @@ const App: React.FC = () => {
   const [imageMetadata, setImageMetadata] = useState<string>('');
   const [githubUrl, setGithubUrl] = useState<string>('');
   const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
+
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGithubUrl(event.target.value);
@@ -159,8 +161,15 @@ const App: React.FC = () => {
 
   const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = await fetchGithubProfile(githubUrl);
-    setProfileData(data);
+    setIsDataLoading(true);
+    try {
+      const data = await fetchGithubProfile(githubUrl);
+      setProfileData(data);
+    } catch (error) {
+      console.error('Failed to fetch GitHub profile:', error);
+    } finally {
+      setIsDataLoading(false);
+    }
   };
 
   return (
@@ -184,7 +193,7 @@ const App: React.FC = () => {
           <AvatarGenerator setImageMetadata={setImageMetadata} />
         </Column>
         <Column>
-          <ProfilePreview imageMetadata={imageMetadata} profileData={profileData} />
+          <ProfilePreview isDataLoading={isDataLoading} imageMetadata={imageMetadata} profileData={profileData} />
         </Column>
       </ContentContainer>
       <Footer>

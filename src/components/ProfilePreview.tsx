@@ -66,12 +66,39 @@ const InfoItem = styled.li`
   }
 `;
 
+const LoaderWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+`;
+
+const Loader = styled.div`
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+  border-top: 4px solid #66ccff;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  height: 60px;
+  width: 60px;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
 interface ProfilePreviewProps {
+  isDataLoading: boolean;
   imageMetadata: string;
   profileData: ProfileData | null;
 }
 
-export const ProfilePreview: React.FC<ProfilePreviewProps> = ({ imageMetadata, profileData }) => {
+export const ProfilePreview: React.FC<ProfilePreviewProps> = ({ isDataLoading, imageMetadata, profileData }) => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   const userInfos = useMemo(() => [
@@ -100,6 +127,17 @@ export const ProfilePreview: React.FC<ProfilePreviewProps> = ({ imageMetadata, p
       setAvatarUrl(url);
     }
   }, [imageMetadata]);
+
+
+  if (isDataLoading) {
+    return (
+      <MacOsContainer>
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      </MacOsContainer>
+    );
+  }
 
   return (
     <MacOsContainer>
