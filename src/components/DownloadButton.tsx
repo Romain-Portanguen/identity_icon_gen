@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button } from '../styles/components/ActionButton';
+import { ActionButton } from '../styles/components/ActionButton';
 
 interface DownloadButtonProps {
   canvasRef: React.RefObject<HTMLCanvasElement>;
   format: 'png' | 'jpg';
 }
 
-const DownloadButton: React.FC<DownloadButtonProps> = ({ canvasRef, format }) => {
+export const DownloadButton: React.FC<DownloadButtonProps> = ({ canvasRef, format }) => {
   const downloadImage = () => {
     const canvas = canvasRef.current;
     if (canvas) {
@@ -17,7 +17,5 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ canvasRef, format }) =>
     }
   };
 
-  return <Button onClick={downloadImage}>Download as {format.toUpperCase()}</Button>;
+  return <ActionButton onClick={downloadImage}>Download as {format.toUpperCase()}</ActionButton>;
 };
-
-export default DownloadButton;

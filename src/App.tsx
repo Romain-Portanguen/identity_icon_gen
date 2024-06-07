@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AvatarGenerator } from './components/AvatarGenerator';
-import { SvgCodeViewer } from './components/SVGViewer';
+import { ProfilePreview } from './components/ProfilePreview';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FormContainer, Form, Input, SubmitButton } from './styles/components/Form';
+import { ProfileData } from './utils/@types/profile-data';
+import { fetchGithubProfile } from './utils/fetch-github-profile';
 
 const AppContainer = styled.div`
   align-items: center;
@@ -15,8 +18,15 @@ const AppContainer = styled.div`
   justify-content: space-between;
   min-height: 100vh;
   overflow: hidden;
-  padding: 20px;
   width: 100%;
+
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
+
+  @media (min-width: 600px) {
+    padding: 30px;
+  }
 `;
 
 const AppTitle = styled.h1`
@@ -28,14 +38,13 @@ const AppTitle = styled.h1`
   font-weight: 700;
   letter-spacing: -0.5px;
   margin: 0 10px;
-  padding: 20px;
+  padding-top: 10px;
   text-align: center;
   transition: all 0.3s ease-in-out;
   width: 100%;
 
   @media (min-width: 600px) {
-    font-size: 3.5rem;
-    padding: 30px;
+    font-size: 2.9rem;
   }
 
   &:hover {
@@ -44,23 +53,26 @@ const AppTitle = styled.h1`
   }
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;
+
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 20px;
   justify-content: center;
   margin: 20px 0;
   max-width: 800px;
   width: 100%;
-  flex: 1;
 
   @media (min-width: 768px) {
     flex-direction: row;
     margin: 20px;
-  }
-
-  @media (min-width: 400px) {
-    align-items: center;
   }
 `;
 
@@ -76,28 +88,27 @@ const Column = styled.div`
 `;
 
 const Footer = styled.footer`
+  align-items: center;
   background: linear-gradient(to right, #66aacc, #99ccee);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: flex;
   box-sizing: border-box;
   font-size: 24px;
   font-weight: 700;
-  margin-top: 20px;
+  gap: 10px;
+  justify-content: center;
   max-width: 800px;
-  padding: 20px;
+  padding-top: 10px;
   text-align: center;
   transition: all 0.3s ease-in-out;
   width: 100%;
   
   p {
     font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
-    text-align: center;
+    font-size: 12px;
     margin: 0;
-
-    @media (min-width: 600px) {
-      font-size: 16px;
-    }
+    text-align: center;
   }
 
   a {
@@ -106,7 +117,6 @@ const Footer = styled.footer`
     -webkit-text-fill-color: transparent;
     color: #3399cc;
     text-decoration: none;
-    margin: 0 10px;
 
     &:hover {
       background: linear-gradient(to bottom, #3399cc, #66ccff);
@@ -116,16 +126,18 @@ const Footer = styled.footer`
       text-decoration: underline;
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
 `;
 
 const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  gap: 5px;
 
   a {
-    margin: 0 10px;
-    font-size: 24px;
+    font-size: 20px;
     transition: all 0.3s ease-in-out;
 
     &:hover {
@@ -137,17 +149,51 @@ const IconWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
-  const [svgCode, setSvgCode] = useState<string>('');
+  const [imageMetadata, setImageMetadata] = useState<string>('');
+  const [githubUrl, setGithubUrl] = useState<string>('');
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
+
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGithubUrl(event.target.value);
+  };
+
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsDataLoading(true);
+    try {
+      const data = await fetchGithubProfile(githubUrl);
+      setProfileData(data);
+    } catch (error) {
+      console.error('Failed to fetch GitHub profile:', error);
+    } finally {
+      setIsDataLoading(false);
+    }
+  };
 
   return (
     <AppContainer>
       <AppTitle>IIG - Identity Icon Generator</AppTitle>
+      <Row>
+        <FormContainer>
+          <Form onSubmit={handleFormSubmit}>
+            <Input
+              type="text"
+              placeholder="Enter your GitHub profile URL"
+              value={githubUrl}
+              onChange={handleInputChange}
+            />
+            <SubmitButton type="submit">Fetch Profile</SubmitButton>
+          </Form>
+        </FormContainer>
+      </Row>
       <ContentContainer>
         <Column>
-          <AvatarGenerator setSvgCode={setSvgCode} />
+          <AvatarGenerator setImageMetadata={setImageMetadata} />
         </Column>
         <Column>
-          <SvgCodeViewer svgCode={svgCode} />
+          <ProfilePreview isDataLoading={isDataLoading} imageMetadata={imageMetadata} profileData={profileData} />
         </Column>
       </ContentContainer>
       <Footer>
@@ -158,7 +204,7 @@ const App: React.FC = () => {
           <a href="https://github.com/Romain-Portanguen" target="_blank" rel="noreferrer">
             <FaGithub />
           </a>
-          <a href="https://www.linkedin.com/in/ṛomain-portangueṇ" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/romain-portanguen" target="_blank" rel="noreferrer">
             <FaLinkedin />
           </a>
         </IconWrapper>
