@@ -1,0 +1,42 @@
+/* Global Styles */
+:root {
+  /* Font and Text */
+  --font-family: 'Roboto', sans-serif;
+  --font-weight-normal: 400;
+  --line-height: 1.5;
+  --font-smoothing-moz: grayscale;
+  --font-smoothing-webkit: antialiased;
+  --text-rendering: optimizeLegibility;
+  --color-scheme: light dark;
+  
+  /* Colors */
+  --background-color: #242424;
+
+  /* Dimensions */
+  --viewport-height: 100vh;
+  --viewport-width: 100vw;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  height: var(--viewport-height);
+  width: var(--viewport-width);
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height);
+  -moz-osx-font-smoothing: var(--font-smoothing-moz);
+  -webkit-font-smoothing: var(--font-smoothing-webkit);
+  text-rendering: var(--text-rendering);
+  color-scheme: var(--color-scheme);
+  margin: 0;
+}
