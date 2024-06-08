@@ -1,8 +1,8 @@
 ![identity_icon_gen](https://socialify.git.ci/Romain-Portanguen/identity_icon_gen/image?font=Raleway&language=1&name=1&owner=1&pattern=Charlie%20Brown&theme=Dark)
 
-<p align="center">
-Lightweight application for generating random identity icons
-</p>
+<h3 align="center">
+Lightweight, high-performance React application for generating random identity icons
+</h3>
 
 <p align="center">
 <img src="https://img.shields.io/badge/-Typescript-05122A?style=plastic&amp;logo=Typescript&amp;color=2B343B" alt="shields">
@@ -38,6 +38,8 @@ The interface also offers a preview in the context of use. To do this, we simula
 Have fun! 
 
 ![](https://github.com/Romain-Portanguen/identity_icon_gen/blob/ebc08f44566e62a7abe95128b407c85ac404de07/public/assets/app.png)
+
+![](https://github.com/Romain-Portanguen/identity_icon_gen/blob/9f7aa688343bce96521ee96697cdf83cb1646c81/public/assets/lighthouse.png)
  
 <h3>Prerequisites</h3>
 
