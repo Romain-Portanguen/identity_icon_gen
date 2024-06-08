@@ -7,21 +7,21 @@ import { RESOLUTION } from '../@types/constants';
 jest.mock('../color-generator');
 jest.mock('../image-data-generator');
 
-describe('IconUtils class', () => {
+describe('The IconUtils class', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('generateRandomSeed method', () => {
-    it('should generate a random seed of length 16', () => {
+  describe('The generateRandomSeed method', () => {
+    it('Should generate a random seed of length 16', () => {
       const seed = IconUtils['generateRandomSeed']();
       expect(seed).toHaveLength(16);
       expect(typeof seed).toBe('string');
     });
   });
 
-  describe('buildOptions method', () => {
-    it('should build options with defaults', () => {
+  describe('The buildOptions method', () => {
+    it('Should build options with defaults', () => {
       const mockCreateColor = jest.fn().mockReturnValue('hsl(0, 100%, 50%)');
       (ColorGenerator as jest.Mock).mockImplementation(() => ({
         createColor: mockCreateColor,
@@ -37,7 +37,7 @@ describe('IconUtils class', () => {
       expect(builtOpts.spotcolor).toBe('hsl(0, 100%, 50%)');
     });
 
-    it('should use provided options', () => {
+    it('Should use provided options', () => {
       const opts: IconOptions = {
         size: 256,
         seed: 'test-seed',
@@ -54,8 +54,8 @@ describe('IconUtils class', () => {
     });
   });
 
-  describe('renderIcon method', () => {
-    it('should render an icon on the canvas', () => {
+  describe('The renderIcon method', () => {
+    it('Should render an icon on the canvas', () => {
       const opts: CanvasOptions = {
         size: RESOLUTION,
         seed: 'test-seed',
