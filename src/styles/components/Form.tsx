@@ -21,7 +21,7 @@ export const Form = styled.form`
   }
 `;
 
-export const Input = styled.input`
+export const FormInput = styled.input`
   background: #2d2d2d;
   border-radius: 4px;
   border: 1px solid #009bff;
@@ -47,16 +47,26 @@ export const Input = styled.input`
   }
 `;
 
-export const SubmitButton = styled.button`
-  background: linear-gradient(to top, #3399cc, #66ccff);
-  border-radius: 4px;
+export const FormSubmitButton = styled.button`
+  align-items: center;
+  background: linear-gradient(to top, #3c99dc, #66ccff);
+  border-radius: 6px;
   border: none;
   color: #fff;
   cursor: pointer;
+  display: inline-flex;
   font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
+  font-weight: 600;
+  gap: 7px;
   padding: 8px 16px;
   transition: background-color 0.3s, box-shadow 0.3s;
+
+  & > svg {
+    fill: #fff;
+    height: 20px;
+    width: 20px;
+  }
 
   &:hover {
     box-shadow: 0 0 10px rgba(0, 91, 187, 0.5);
