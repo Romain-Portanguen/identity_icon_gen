@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FaSync, FaPlay } from 'react-icons/fa';
-import { IconUtils } from '../utils/icon-utils';
-import { IconOptions, CanvasOptions } from '../utils/@types/icon-utils.requirements';
-import { DownloadButton } from './DownloadButton';
+import { useAvatarGenerator } from '../hooks/use-avatar-generator';
+import { useDownloadImage } from '../hooks/use-download-image';
 import { MacOsContainer } from '../styles/components/MacOsContainer';
-import { AVATAR_GENERATION_INTERVAL, AVATAR_GENERATION_TIMEOUT } from '../utils/@types/constants';
+import { ActionButton } from '../styles/components/ActionButton';
 
 const AvatarContentWrapper = styled.div`
   display: flex;
@@ -76,47 +75,14 @@ interface AvatarGeneratorProps {
 }
 
 export const AvatarGenerator: React.FC<AvatarGeneratorProps> = ({ setImageMetadata }) => {
-  const [canvasUrl, setCanvasUrl] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const {
+    canvasUrl,
+    canvasRef,
+    generateAvatar,
+    startMultipleAvatarGeneration
+  } = useAvatarGenerator(setImageMetadata);
 
-  const generateAvatar = useCallback(() => {
-    const canvas = canvasRef.current;
-
-    if (canvas) {
-      const iconOptions: IconOptions = {
-        size: 256,
-        seed: Math.floor(Math.random() * Math.pow(10, 16)).toString(16),
-      };
-      const builtOptions: CanvasOptions = IconUtils.buildOptions(iconOptions);
-      IconUtils.renderIcon(builtOptions, canvas);
-      setCanvasUrl(canvas.toDataURL());
-
-      const context = canvas.getContext('2d');
-      const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
-
-      if (imageData) {
-        const svgCode = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
-            <foreignObject width="100%" height="100%">
-              <div xmlns="http://www.w3.org/1999/xhtml">
-                <img src="${canvas.toDataURL()}" alt="Identity Icon" />
-              </div>
-            </foreignObject>
-          </svg>
-        `;
-        setImageMetadata(svgCode.trim());
-      }
-    }
-  }, [setImageMetadata]);
-
-  const handleGenerateMultipleAvatars = useCallback(() => {
-    const intervalId = setInterval(generateAvatar, AVATAR_GENERATION_INTERVAL);
-    setTimeout(() => clearInterval(intervalId), AVATAR_GENERATION_TIMEOUT);
-  }, [generateAvatar]);
-
-  useEffect(() => {
-    generateAvatar();
-  }, [generateAvatar]);
+  const downloadImage = useDownloadImage(canvasRef);
 
   return (
     <MacOsContainer>
@@ -127,7 +93,7 @@ export const AvatarGenerator: React.FC<AvatarGeneratorProps> = ({ setImageMetada
         {canvasUrl && (
           <>
             <ButtonWrapper>
-              <IconButton onClick={handleGenerateMultipleAvatars}>
+              <IconButton onClick={startMultipleAvatarGeneration}>
                 <FaPlay />
               </IconButton>
               <IconButton onClick={generateAvatar}>
@@ -135,8 +101,8 @@ export const AvatarGenerator: React.FC<AvatarGeneratorProps> = ({ setImageMetada
               </IconButton>
             </ButtonWrapper>
             <DownloadButtonWrapper>
-              <DownloadButton canvasRef={canvasRef} format="png" />
-              <DownloadButton canvasRef={canvasRef} format="jpg" />
+              <ActionButton onClick={() => downloadImage('png')}>Download PNG</ActionButton>
+              <ActionButton onClick={() => downloadImage('jpg')}>Download JPG</ActionButton>
             </DownloadButtonWrapper>
           </>
         )}

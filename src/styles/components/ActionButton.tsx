@@ -7,6 +7,7 @@ export const ActionButton = styled.button`
   color: #fff;
   font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
+  font-weight: 600;
   padding: 10px 20px;
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 

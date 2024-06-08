@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AvatarGenerator } from './components/AvatarGenerator';
 import { ProfilePreview } from './components/ProfilePreview';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { FormContainer, Form, Input, SubmitButton } from './styles/components/Form';
+import { FormContainer, Form, FormInput, FormSubmitButton } from './styles/components/Form';
 import { ProfileData } from './utils/@types/profile-data';
 import { fetchGithubProfile } from './utils/fetch-github-profile';
 
@@ -178,13 +178,16 @@ const App: React.FC = () => {
       <Row>
         <FormContainer>
           <Form onSubmit={handleFormSubmit}>
-            <Input
+            <FormInput
               type="text"
-              placeholder="Enter your GitHub profile URL"
+              placeholder="Enter your GitHub profile URL or username"
               value={githubUrl}
               onChange={handleInputChange}
             />
-            <SubmitButton type="submit">Fetch Profile</SubmitButton>
+            <FormSubmitButton type="submit">
+              Fetch profile data
+              <FaGithub />
+            </FormSubmitButton>
           </Form>
         </FormContainer>
       </Row>
@@ -201,10 +204,10 @@ const App: React.FC = () => {
           Made by Romain Portanguen - Software Engineer
         </p>
         <IconWrapper>
-          <a href="https://github.com/Romain-Portanguen" target="_blank" rel="noreferrer">
+          <a href="https://github.com/Romain-Portanguen" target="_blank" rel="noreferrer" aria-label='github-profile'>
             <FaGithub />
           </a>
-          <a href="https://www.linkedin.com/in/romain-portanguen" target="_blank" rel="noreferrer">
+          <a href="https://www.linkedin.com/in/romain-portanguen" target="_blank" rel="noreferrer" aria-label='linkedin-profile'>
             <FaLinkedin />
           </a>
         </IconWrapper>
