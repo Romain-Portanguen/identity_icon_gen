@@ -1,5 +1,10 @@
 export const AVATAR_GENERATION_INTERVAL = 100;
 export const AVATAR_GENERATION_TIMEOUT = 1500;
 export const CANVAS_SIZE = 256;
+export const LIGHTNESS_MULTIPLIER = 25;
+export const LIGHTNESS_SCALE = 4;
+export const MAX_HUE = 360;
+export const MIN_SATURATION = 40;
 export const RESOLUTION = 8;
+export const SATURATION_RANGE = 60;
 export const SEED_MULTIPLIER = Math.pow(10, 16);

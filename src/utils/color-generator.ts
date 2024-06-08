@@ -1,12 +1,12 @@
 import { XorshiftPRNG } from './xorshift-prng';
 import { ColorGeneratorProps } from './@types/color-generator.requirements';
-
-const MAX_HUE = 360;
-const MIN_SATURATION = 40;
-const SATURATION_RANGE = 60;
-const LIGHTNESS_MULTIPLIER = 25;
-const LIGHTNESS_SCALE = 4;
-
+import { 
+  MAX_HUE, 
+  MIN_SATURATION, 
+  SATURATION_RANGE, 
+  LIGHTNESS_SCALE, 
+  LIGHTNESS_MULTIPLIER 
+} from './@types/constants';
 export class ColorGenerator implements ColorGeneratorProps {
   private prng: XorshiftPRNG;
 
