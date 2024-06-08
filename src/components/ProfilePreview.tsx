@@ -59,8 +59,8 @@ const LoaderWrapper = styled.div`
 const Loader = styled.div`
   animation: spin 1s linear infinite;
   border-radius: 50%;
-  border-top: 6px solid #3399cc;
   border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid #66ccff; 
   height: 60px;
   width: 60px;
 
